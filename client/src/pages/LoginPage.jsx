@@ -1,17 +1,50 @@
+import { useState } from "react";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../configs/firebase";
+import { useNavigate } from "react-router";
+
 export default function LoginPage() {
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+  const navigate = useNavigate();
+
+  async function handleLogIn(e) {
+    e.preventDefault();
+    try {
+      // caranya sama persis kayak register, cuma beda di bagian signInWithEmailAndPassword
+      const userLoggedIn = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      console.log(userLoggedIn);
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <>
       <h1>Login Page</h1>
-      <form>
+      <form onSubmit={handleLogIn}>
         <div>
           <label htmlFor="email">Email</label>
           <br />
-          <input type="email" />
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
         </div>
         <div>
           <label htmlFor="password">Password</label>
           <br />
-          <input type="password" />
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
         </div>
         <button>Login</button>
       </form>
