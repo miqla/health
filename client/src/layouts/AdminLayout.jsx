@@ -1,10 +1,12 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Outlet, useNavigate } from "react-router";
 import { auth } from "../configs/firebase";
 import { onAuthStateChanged } from "firebase/auth";
 
 export default function AdminLayout() {
   const navigate = useNavigate();
+  const [isLoadPage, setLoadPage] = useState(true);
+
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       console.log(user);
@@ -17,8 +19,13 @@ export default function AdminLayout() {
         // User is signed out
         // ...
       }
+      setLoadPage(false);
     });
   }, []);
+
+  if (isLoadPage) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <>
