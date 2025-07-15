@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../configs/firebase";
 
 export default function RegisterPage() {
   const [email, setEmail] = useState("");
@@ -6,7 +8,19 @@ export default function RegisterPage() {
 
   async function handleRegister(e) {
     e.preventDefault();
-    console.log(email, password);
+    try {
+      // panggil API firebase dgn 3 params: auth, email & pass
+      const userRegistered = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      console.log(userRegistered);
+    } catch (error) {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.log(errorCode, " - ", errorMessage);
+    }
   }
 
   return (
