@@ -22,12 +22,12 @@ const router = createBrowserRouter([
     element: <AdminLayout />,
     children: [
       {
-        path: "register",
-        element: <RegisterPage />,
+        index: true,
+        element: <LoginPage />,
       },
       {
-        path: "login",
-        element: <LoginPage />,
+        path: "register",
+        element: <RegisterPage />,
       },
     ],
   },
