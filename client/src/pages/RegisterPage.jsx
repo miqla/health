@@ -2,6 +2,7 @@ import { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../configs/firebase";
 import { useNavigate } from "react-router";
+import { ToastContainer, toast } from "react-toastify";
 
 export default function RegisterPage() {
   const [email, setEmail] = useState("");
@@ -23,12 +24,21 @@ export default function RegisterPage() {
     } catch (error) {
       const errorCode = error.code;
       const errorMessage = error.message;
-      console.log(errorCode, " - ", errorMessage);
+      const notify = () => toast(`${errorCode} - ${errorMessage}`);
+
+      notify();
     }
   }
 
   return (
     <>
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        pauseOnFocusLoss={false}
+        draggable
+        pauseOnHover={false}
+      />
       <h1>Register Page</h1>
       <form onSubmit={handleRegister}>
         <div>
