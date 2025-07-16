@@ -25,7 +25,6 @@ export default function RegisterPage() {
       const errorCode = error.code;
       const errorMessage = error.message;
       const notify = () => toast(`${errorCode} - ${errorMessage}`);
-
       notify();
     }
   }

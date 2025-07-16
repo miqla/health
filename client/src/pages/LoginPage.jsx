@@ -2,6 +2,7 @@ import { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../configs/firebase";
 import { useNavigate } from "react-router";
+import { ToastContainer, toast } from "react-toastify";
 
 export default function LoginPage() {
   const [email, setEmail] = useState();
@@ -20,12 +21,20 @@ export default function LoginPage() {
       console.log(userLoggedIn);
       navigate("/");
     } catch (error) {
-      console.log(error);
+      const notify = () => toast(`${error.code} - ${error.message}`);
+      notify();
     }
   }
 
   return (
     <>
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        pauseOnFocusLoss={false}
+        draggable
+        pauseOnHover={false}
+      />
       <h1>Login Page</h1>
       <form onSubmit={handleLogIn}>
         <div>
