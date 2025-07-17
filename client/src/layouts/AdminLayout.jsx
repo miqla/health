@@ -7,9 +7,18 @@ export default function AdminLayout() {
   const navigate = useNavigate();
   const [isLoadPage, setLoadPage] = useState(true);
   const [page, setPage] = useState("login");
+  const basicURL = "http://localhost:5173";
 
-  //   const currentURL = window.location.href;
-  //   console.log(currentURL);
+  const currentURL = window.location.href;
+
+  function setPageOnLoad() {
+    if (currentURL == basicURL + "/auth") {
+      setPage("login");
+      console.log(basicURL + "/auth");
+    } else if (currentURL == basicURL + "/auth/register") {
+      setPage("register");
+    }
+  }
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -24,6 +33,7 @@ export default function AdminLayout() {
         // ...
       }
       setLoadPage(false);
+      setPageOnLoad();
     });
   }, []);
 
