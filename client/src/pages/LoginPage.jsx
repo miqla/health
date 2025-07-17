@@ -35,7 +35,7 @@ export default function LoginPage() {
         draggable
         pauseOnHover={false}
       />
-      <main className="card bg-base-100 shadow-sm w-lg p-5 hover:shadow-xl/30 m-auto">
+      <div className="card bg-base-100 shadow-sm p-5 hover:shadow-xl/30 mx-auto sm:w-lg w-5/6">
         <h1 className="font-bold text-3xl mb-6 text-center">Login Page</h1>
         <form onSubmit={handleLogIn} className="flex flex-col items-center">
           <div className="w-4/6 mb-4">
@@ -45,7 +45,7 @@ export default function LoginPage() {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="border rounded-sm w-full"
+              className="border rounded-sm w-full p-1"
             />
           </div>
           <div className="w-4/6 mb-4">
@@ -55,12 +55,12 @@ export default function LoginPage() {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="border rounded-sm w-full"
+              className="border rounded-sm w-full p-1"
             />
           </div>
           <button className="btn">Login</button>
         </form>
-      </main>
+      </div>
     </>
   );
 }
