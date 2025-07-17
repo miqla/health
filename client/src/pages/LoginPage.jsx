@@ -37,27 +37,28 @@ export default function LoginPage() {
       />
       <main className="card bg-base-100 shadow-sm w-lg p-5 hover:shadow-xl/30 m-auto">
         <h1 className="font-bold text-3xl mb-6 text-center">Login Page</h1>
-        <form onSubmit={handleLogIn}>
-          <div>
+        <form onSubmit={handleLogIn} className="flex flex-col items-center">
+          <div className="w-4/6 mb-4">
             <label htmlFor="email">Email</label>
             <br />
             <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="border"
+              className="border rounded-sm w-full"
             />
           </div>
-          <div>
+          <div className="w-4/6 mb-4">
             <label htmlFor="password">Password</label>
             <br />
             <input
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              className="border rounded-sm w-full"
             />
           </div>
-          <button>Login</button>
+          <button className="btn">Login</button>
         </form>
       </main>
     </>
