@@ -35,28 +35,31 @@ export default function LoginPage() {
         draggable
         pauseOnHover={false}
       />
-      <h1>Login Page</h1>
-      <form onSubmit={handleLogIn}>
-        <div>
-          <label htmlFor="email">Email</label>
-          <br />
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
-        <div>
-          <label htmlFor="password">Password</label>
-          <br />
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
-        <button>Login</button>
-      </form>
+      <main className="card bg-base-100 shadow-sm w-lg p-5 hover:shadow-xl/30 m-auto">
+        <h1 className="font-bold text-3xl mb-6 text-center">Login Page</h1>
+        <form onSubmit={handleLogIn}>
+          <div>
+            <label htmlFor="email">Email</label>
+            <br />
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="border"
+            />
+          </div>
+          <div>
+            <label htmlFor="password">Password</label>
+            <br />
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+          <button>Login</button>
+        </form>
+      </main>
     </>
   );
 }
