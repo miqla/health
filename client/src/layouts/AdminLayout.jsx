@@ -7,7 +7,7 @@ export default function AdminLayout() {
   const navigate = useNavigate();
   const [isLoadPage, setLoadPage] = useState(true);
   const [page, setPage] = useState("login");
-  const basicURL = "http://localhost:5173";
+  const basicURL = "https://health-delta-silk.vercel.app";
 
   const currentURL = window.location.href;
 
