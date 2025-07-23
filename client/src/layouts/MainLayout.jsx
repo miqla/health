@@ -1,25 +1,18 @@
 import { Outlet, useNavigate } from "react-router";
-import { onAuthStateChanged, signOut } from "firebase/auth";
+import { signOut } from "firebase/auth";
 import { auth } from "../configs/firebase";
-import { useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
+import { AuthContext } from "../context/AuthContext";
 
 export default function MainLayout() {
   const navigate = useNavigate();
-  const [isLoadPage, setLoadPage] = useState(true);
+  const { user } = useContext(AuthContext);
 
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      console.log(user);
-      if (!user) {
-        navigate("/auth");
-      }
-      setLoadPage(false);
-    });
+    if (!user) {
+      navigate("/auth");
+    }
   }, []);
-
-  if (isLoadPage) {
-    return <div>Loading...</div>;
-  }
 
   async function handleLogOut() {
     try {
