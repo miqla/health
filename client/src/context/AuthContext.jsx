@@ -13,6 +13,7 @@ export default function AuthContextProvider({ children }) {
   const [isLoadPage, setLoadPage] = useState(true);
 
   useEffect(() => {
+    // karena onAuthStateChanged adalah callback, dy akan tetap jalan terus walupun didalam variabel
     const subscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         setUser(user);
@@ -22,6 +23,7 @@ export default function AuthContextProvider({ children }) {
       setLoadPage(false);
     });
 
+    // di invoke untuk membersihkan/ menghentikan infinite callback
     return () => {
       subscribe();
     };

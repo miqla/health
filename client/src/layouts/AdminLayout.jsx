@@ -1,12 +1,11 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Outlet, useNavigate } from "react-router";
-import { auth } from "../configs/firebase";
-import { onAuthStateChanged } from "firebase/auth";
+import { AuthContext } from "../context/AuthContext";
 
 export default function AdminLayout() {
   const navigate = useNavigate();
-  const [isLoadPage, setLoadPage] = useState(true);
   const [page, setPage] = useState("login");
+  const { user } = useContext(AuthContext);
   const basicURL = "http://localhost:5173";
 
   const currentURL = window.location.href;
@@ -21,24 +20,14 @@ export default function AdminLayout() {
   }
 
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        // User is signed in, see docs for a list of available properties
-        // https://firebase.google.com/docs/reference/js/auth.user
-        const uid = user.uid;
-        navigate("/");
-      } else {
-        // User is signed out
-        // ...
-      }
-      setLoadPage(false);
-      setPageOnLoad();
-    });
+    if (user) {
+      // User is signed in, see docs for a list of available properties
+      // https://firebase.google.com/docs/reference/js/auth.user
+      // const uid = user.uid;
+      navigate("/");
+    }
+    setPageOnLoad();
   }, []);
-
-  if (isLoadPage) {
-    return <div>Loading...</div>;
-  }
 
   function handleClick() {
     if (page == "login") {
