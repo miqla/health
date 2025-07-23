@@ -1,7 +1,13 @@
-import { createContext } from "react";
+import { createContext, useState } from "react";
 
-export const AuthContext = createContext(null);
+export const AuthContext = createContext({
+  user: null,
+  setUser: () => {},
+});
 
 export default function AuthContextProvider({ children }) {
-  return <AuthContext value={1}>{children}</AuthContext>;
+  const [user, setUser] = useState("ada");
+  const value = { user, setUser };
+
+  return <AuthContext value={value}>{children}</AuthContext>;
 }

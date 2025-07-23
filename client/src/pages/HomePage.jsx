@@ -2,8 +2,8 @@ import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 
 export default function HomePage() {
-  const test = useContext(AuthContext);
-  console.log(test);
+  const { user, setUser } = useContext(AuthContext);
+  console.log(user, "homepage");
 
   return (
     <>
