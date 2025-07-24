@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../configs/firebase";
+import { useNavigate } from "react-router";
 
 export default function HomePage() {
   const [products, setProducts] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function getProducts() {
@@ -23,11 +25,16 @@ export default function HomePage() {
   return (
     <>
       <main className="mx-auto max-w-6xl w-9/10 flex flex-col">
-        <h1 className="font-bold text-3xl text-center mb-3">Daftar Produk</h1>
-        <button className="btn self-end mb-2 w-max">Add Data</button>
+        <h1 className="font-bold text-3xl text-center mb-3">Product List</h1>
+        <button
+          onClick={() => navigate("/add")}
+          className="btn self-end mb-2 w-max"
+        >
+          Add Data
+        </button>
         <div className="overflow-x-auto rounded-box border border-base-content/5 bg-base-100 ">
           <table className="table">
-            {/* head */}
+            {/* head */})
             <thead>
               <tr>
                 <th>No</th>
