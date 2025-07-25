@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, doc, deleteDoc } from "firebase/firestore";
 import { db } from "../configs/firebase";
 import { useNavigate } from "react-router";
 
@@ -7,20 +7,30 @@ export default function HomePage() {
   const [products, setProducts] = useState([]);
   const navigate = useNavigate();
 
+  async function getProducts() {
+    const querySnapshot = await getDocs(collection(db, "products"));
+    //   kalau pakai map jangan lupa tambahin .docs, kalau forEach gaperlu .docs
+    const result = querySnapshot.docs.map((doc) => {
+      return {
+        id: doc.id,
+        ...doc.data(),
+      };
+    });
+    setProducts(result);
+  }
+
   useEffect(() => {
-    async function getProducts() {
-      const querySnapshot = await getDocs(collection(db, "products"));
-      //   kalau pakai map jangan lupa tambahin .docs, kalau forEach gaperlu .docs
-      const result = querySnapshot.docs.map((doc) => {
-        return {
-          id: doc.id,
-          ...doc.data(),
-        };
-      });
-      setProducts(result);
-    }
     getProducts();
   }, []);
+
+  async function deleteProduct(id) {
+    try {
+      const del = await deleteDoc(doc(db, "products", id));
+      getProducts();
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
     <>
@@ -60,7 +70,12 @@ export default function HomePage() {
                   <td>{product.price}</td>
                   <td className="w-[180px]">
                     <button className="btn max-w-max">edit</button>
-                    <button className="btn max-w-max ml-2">delete</button>
+                    <button
+                      onClick={() => deleteProduct(product.id)}
+                      className="btn max-w-max ml-2"
+                    >
+                      delete
+                    </button>
                   </td>
                 </tr>
               ))}
