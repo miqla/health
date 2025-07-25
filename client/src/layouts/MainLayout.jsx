@@ -73,12 +73,14 @@ export default function MainLayout() {
                 </li>
               </ul>
             </div>
-            <a className="btn btn-ghost text-xl">Health & Medicine</a>
+            <a onClick={() => navigate("/")} className="btn btn-ghost text-xl">
+              Health & Medicine
+            </a>
           </div>
           <div className="navbar-center hidden lg:flex">
             <ul className="menu menu-horizontal px-1">
               <li>
-                <a>Item 1</a>
+                <a onClick={() => navigate("/")}>Products</a>
               </li>
               <li>
                 <details>

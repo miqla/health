@@ -41,6 +41,7 @@ export default function HomePage() {
                 <th>Name</th>
                 <th>Image</th>
                 <th>Price</th>
+                <th>Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -57,6 +58,10 @@ export default function HomePage() {
                     />
                   </td>
                   <td>{product.price}</td>
+                  <td className="w-[180px]">
+                    <button className="btn max-w-max">edit</button>
+                    <button className="btn max-w-max ml-2">delete</button>
+                  </td>
                 </tr>
               ))}
             </tbody>
