@@ -1,13 +1,33 @@
 import { useState } from "react";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../configs/firebase";
+import {
+  GoogleAuthProvider,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+} from "firebase/auth";
+import { auth, googleProvider } from "../configs/firebase";
 import { useNavigate } from "react-router";
 import { ToastContainer, toast } from "react-toastify";
+import { FcGoogle } from "react-icons/fc";
 
 export default function LoginPage() {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const navigate = useNavigate();
+
+  async function handleGoogleLogin() {
+    try {
+      const result = await signInWithPopup(auth, googleProvider);
+      // This gives you a Google Access Token. You can use it to access the Google API.
+      const credential = GoogleAuthProvider.credentialFromResult(result);
+      const token = credential.accessToken;
+      // The signed-in user info.
+      const user = result.user;
+      navigate("/");
+    } catch (error) {
+      const notify = () => toast(`${error.code} - ${error.message}`);
+      notify();
+    }
+  }
 
   async function handleLogIn(e) {
     e.preventDefault();
@@ -58,8 +78,11 @@ export default function LoginPage() {
               className="border rounded-sm w-full p-1"
             />
           </div>
-          <button className="btn">Login</button>
+          <button className="btn mb-4">Login</button>
         </form>
+        <button onClick={handleGoogleLogin} className="btn max-w-max mx-auto">
+          <FcGoogle /> Login with Google
+        </button>
       </div>
     </>
   );
