@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { collection, getDocs, doc, deleteDoc } from "firebase/firestore";
 import { db } from "../configs/firebase";
 import { useNavigate } from "react-router";
+import { toast, ToastContainer } from "react-toastify";
 
 export default function HomePage() {
   const [products, setProducts] = useState([]);
@@ -25,19 +26,29 @@ export default function HomePage() {
 
   async function deleteProduct(id) {
     try {
-      const del = await deleteDoc(doc(db, "products", id));
+      await deleteDoc(doc(db, "products", id));
       getProducts();
+      const notify = () => toast(`data has been deleted`);
+      notify();
     } catch (error) {
-      console.log(error);
+      const notify = () => toast(`${error.code} - ${error.message}`);
+      notify();
     }
   }
 
   return (
     <>
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        pauseOnFocusLoss={false}
+        draggable
+        pauseOnHover={false}
+      />
       <main className="mx-auto max-w-6xl w-9/10 flex flex-col">
         <h1 className="font-bold text-3xl text-center mb-3">Product List</h1>
         <button
-          onClick={() => navigate("/add")}
+          onClick={() => navigate("/products/add")}
           className="btn self-end mb-2 w-max"
         >
           Add Data

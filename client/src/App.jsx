@@ -18,7 +18,7 @@ const router = createBrowserRouter([
         element: <HomePage />,
       },
       {
-        path: "add",
+        path: "products/add",
         element: <AddProductPage />,
       },
     ],

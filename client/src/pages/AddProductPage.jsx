@@ -13,7 +13,7 @@ export default function AddProductPage() {
   async function handleSubmit(e) {
     e.preventDefault();
     try {
-      const docRef = await addDoc(collection(db, "products"), {
+      await addDoc(collection(db, "products"), {
         name: name,
         price: price,
         imageUrl: imageUrl,
@@ -64,7 +64,7 @@ export default function AddProductPage() {
               type="number"
               id="price"
               value={price}
-              onChange={(e) => setPrice(e.target.value)}
+              onChange={(e) => setPrice(+e.target.value)}
               required
             />
             <button className="btn justify-end max-w-max self-end">
