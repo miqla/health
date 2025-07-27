@@ -7,6 +7,7 @@ import RegisterPage from "./pages/RegisterPage";
 import LoginPage from "./pages/LoginPage";
 import AuthContextProvider from "./context/AuthContext";
 import AddProductPage from "./pages/AddProductPage";
+import EditProductPage from "./pages/editProductPage";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
       {
         path: "products/add",
         element: <AddProductPage />,
+      },
+      {
+        path: "products/edit/:id",
+        element: <EditProductPage />,
       },
     ],
   },

@@ -80,7 +80,12 @@ export default function HomePage() {
                   </td>
                   <td>{product.price}</td>
                   <td className="w-[180px]">
-                    <button className="btn max-w-max">edit</button>
+                    <button
+                      onClick={() => navigate(`/products/edit/${product.id}`)}
+                      className="btn max-w-max"
+                    >
+                      edit
+                    </button>
                     <button
                       onClick={() => deleteProduct(product.id)}
                       className="btn max-w-max ml-2"
