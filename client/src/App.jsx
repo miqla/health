@@ -7,6 +7,7 @@ import RegisterPage from "./pages/RegisterPage";
 import LoginPage from "./pages/LoginPage";
 import AuthContextProvider from "./context/AuthContext";
 import AddProductPage from "./pages/AddProductPage";
+import NotFoundPage from "./pages/notFoundPage";
 import EditProductPage from "./pages/editProductPage";
 
 const router = createBrowserRouter([
@@ -42,7 +43,12 @@ const router = createBrowserRouter([
       },
     ],
   },
+  {
+    path: "*",
+    element: <NotFoundPage />,
+  },
 ]);
+
 function App() {
   return (
     <>
