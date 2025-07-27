@@ -58,8 +58,9 @@ export default function AddProductPage() {
               value={imageUrl}
               onChange={(e) => setImageUrl(e.target.value)}
               required
+              disabled
             />
-            <UploadWidget />
+            <UploadWidget setImage={setImageUrl} />
             <label htmlFor="price">Price</label>
             <input
               className="border rounded-sm p-1"
