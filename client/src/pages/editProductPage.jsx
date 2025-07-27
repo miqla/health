@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { toast, ToastContainer } from "react-toastify";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "../configs/firebase";
 
 export default function EditProductPage() {
@@ -14,7 +14,8 @@ export default function EditProductPage() {
   async function handleSubmit(e) {
     e.preventDefault();
     try {
-      await addDoc(collection(db, "products"), {
+      const docRef = doc(db, "products", id);
+      await updateDoc(docRef, {
         name: name,
         price: price,
         imageUrl: imageUrl,
@@ -27,6 +28,28 @@ export default function EditProductPage() {
       notify();
     }
   }
+
+  async function getData() {
+    try {
+      // get a reference to the document
+      const docRef = doc(db, "products", id);
+      // fetch the document data
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        setName(docSnap.data().name);
+        setImageUrl(docSnap.data().imageUrl);
+        setPrice(docSnap.data().price);
+      } else {
+        console.log("document not found!");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    getData();
+  }, []);
 
   return (
     <>
