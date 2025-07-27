@@ -3,6 +3,7 @@ import { useNavigate } from "react-router";
 import { toast, ToastContainer } from "react-toastify";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../configs/firebase";
+import UploadWidget from "../components/UploadWidget";
 
 export default function AddProductPage() {
   const [name, setName] = useState("");
@@ -58,6 +59,7 @@ export default function AddProductPage() {
               onChange={(e) => setImageUrl(e.target.value)}
               required
             />
+            <UploadWidget />
             <label htmlFor="price">Price</label>
             <input
               className="border rounded-sm p-1"
