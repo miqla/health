@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { toast, ToastContainer } from "react-toastify";
-import { collection, addDoc, doc, getDoc, updateDoc } from "firebase/firestore";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "../configs/firebase";
+import UploadWidget from "../components/UploadWidget";
 
 export default function EditProductPage() {
   const [name, setName] = useState("");
@@ -81,7 +82,9 @@ export default function EditProductPage() {
               value={imageUrl}
               onChange={(e) => setImageUrl(e.target.value)}
               required
+              disabled
             />
+            <UploadWidget setImage={setImageUrl} />
             <label htmlFor="price">Price</label>
             <input
               className="border rounded-sm p-1"
