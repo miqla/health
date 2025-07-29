@@ -7,7 +7,7 @@ import RegisterPage from "./pages/RegisterPage";
 import LoginPage from "./pages/LoginPage";
 import AuthContextProvider from "./context/AuthContext";
 import AddProductPage from "./pages/AddProductPage";
-import NotFoundPage from "./pages/notFoundPage";
+import NotFoundPage from "./pages/NotFoundPage";
 import EditProductPage from "./pages/editProductPage";
 
 const router = createBrowserRouter([
